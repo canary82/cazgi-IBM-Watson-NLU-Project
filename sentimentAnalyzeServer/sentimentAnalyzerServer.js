@@ -29,5 +29,26 @@ app.get("/text/sentiment", (req,res) => {
 
 let server = app.listen(8080, () => {
     console.log('Listening', server.address().port)
-})
+});
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+function getNLUInstance() {
+    let api_key = process.env.API_KEY;
+    let api_url = process.env.API_URL;
+
+    const nluV1 = require('ibm-watson/natural-language-understanding/v1');
+    const { auth } = require('ibm-watson/auth');
+
+    const nlu = new nluV1({
+        version: "2021-05-16",
+        authenticator: new auth({
+            apikey: api_key,
+        }),
+        serviceUrl: api_url,
+    });
+
+    return nlu;
+}
 
