@@ -19,16 +19,13 @@ app.get("/url/emotion", (req,res) => {
     const analyzeParams = {
         'url': req.query.url,
         'features': {
-            'keywords': {
-                'emotion': true,
-                'limit': 2,
-            },
+            'emotion': {},
         },
     };
 
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            res.send(analysisResults.keywords.emotion, null, 2);
+            res.send(analysisResults.result.emotion.document.emotion, null, 2);
         })
         .catch(err => {
             return res.status(400).send({
@@ -41,18 +38,16 @@ app.get("/url/sentiment", (req,res) => {
     const analyzeParams = {
         'url': req.query.url,
         'features': {
-            'keywords': {
-                'sentiment': true,
-                'limit': 2,
-            },
+            'sentiment': {},
         },
     };
 
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            res.send(analysisResults.keywords.sentiment, null, 2);
+            res.send(analysisResults.result.sentiment.document.label, null, 2);
         })
         .catch(err => {
+            console.log(err);
             return res.status(400).send({
                 message: err
             });
@@ -63,16 +58,13 @@ app.get("/text/emotion", (req,res) => {
     const analyzeParams = {
         'text': req.query.text,
         'features': {
-            'keywords': {
-                'emotion': true,
-                'limit': 2,
-            },
+            'emotion': {},
         },
     };
 
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            res.send(analysisResults.keywords.emotion, null, 2);
+            res.send(analysisResults.result.emotion.document.emotion, null, 2);
         })
         .catch(err => {
             return res.status(400).send({
@@ -85,16 +77,13 @@ app.get("/text/sentiment", (req,res) => {
      const analyzeParams = {
         'text': req.query.text,
         'features': {
-            'keywords': {
-                'sentiment': true,
-                'limit': 2,
-            },
+            'sentiment': {},
         },
     };
 
     nlu.analyze(analyzeParams)
         .then(analysisResults => {
-            res.send(analysisResults.keywords.sentiment, null, 2);
+            res.send(analysisResults.result.sentiment.document.label, null, 2);
         })
         .catch(err => {
             console.log(err);

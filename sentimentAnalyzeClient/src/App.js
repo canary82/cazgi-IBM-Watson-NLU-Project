@@ -5,12 +5,17 @@ import React from 'react';
 import axios from 'axios';
 
 class App extends React.Component {
-  state = {innercomp:<textarea rows="4" cols="50" id="textinput"/>,
-            mode: "text",
-          sentimentOutput:[],
-          sentiment:true
-        }
-  
+    state = {
+        innercomp: <textarea rows="4" cols="50" id="textinput" />,
+        mode: "text",
+        sentimentOutput: [],
+        sentiment: true
+    }
+
+    componentDidMount() {
+        document.title = 'Sentiment Analyzer';
+    }
+
   renderTextArea = ()=>{
     document.getElementById("textinput").value = "";
     if(this.state.mode === "url") {
@@ -78,10 +83,8 @@ class App extends React.Component {
   }
   
 
-  render() {
-    return (
-        <>
-            <title>Sentiment Analyzer</title>
+    render() {
+        return (
             <div className="App">
                 <button className="btn btn-info" onClick={this.renderTextArea}>Text</button>
                 <button className="btn btn-dark" onClick={this.renderTextBox}>URL</button>
@@ -93,8 +96,7 @@ class App extends React.Component {
                 <br />
                 {this.state.sentimentOutput}
             </div>
-        </>
-    );
+        );
     }
 }
 
